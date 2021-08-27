@@ -25,7 +25,7 @@ public class Helper {
         };
     }
 
-//    Uncomment if needed
+//    TODO Uncomment if needed
 //    @Contract(pure = true)
 //    public static int convertPosToInt(Integer @NotNull [] pos){ return pos[0] + 8*pos[1]; }
 //    @Contract(value = "_ -> new", pure = true)
