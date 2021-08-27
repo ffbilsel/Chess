@@ -58,5 +58,6 @@ public class Main {
         newGame.addPiece(pieceBlueprint);
         currentPiece = Game.board[4][3].getCurrentPiece();
         System.out.println(Helper.pieceTypeToString(currentPiece.getType()) + currentPiece.getColor() +currentPiece.getId());
+        System.out.println("46546");
     }
 }
