@@ -2,16 +2,15 @@ package com.pieces;
 
 import com.game.Piece;
 import com.helper.Helper;
-import com.helper.PieceColor;
+import com.helper.PieceBlueprint;
 import com.helper.PieceType;
+import com.movement.MoveDiagonal;
+import com.movement.MoveLine;
+import com.movement.MoveType;
+import org.jetbrains.annotations.NotNull;
 
 public class Queen extends Piece {
-    public Queen(PieceColor color) {
-        super(color, PieceType.QUEEN, Helper.createId());
-    }
-
-    //TODO move function
-    @Override
-    public void move() {
+    public Queen(@NotNull PieceBlueprint pieceBlueprint) {
+        super(pieceBlueprint.getPieceColor(), PieceType.KING, Helper.createId(), new MoveType[]{new MoveDiagonal(pieceBlueprint.getPos()), new MoveLine(pieceBlueprint.getPos())},pieceBlueprint.getX(), pieceBlueprint.getY() );
     }
 }

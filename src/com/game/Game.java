@@ -11,12 +11,10 @@ import java.util.Stack;
 
 public class Game {
 
-    //TODO -------------------
     private final Stack<Path> log = new Stack<>();
     public static Cell[][] board = new Cell[8][8];
     public static final int boardSize = 8;
 
-    //TODO handle exceptions
     public void addPiece(@NotNull PieceBlueprint pieceBlueprint) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Cell targetCell = board[pieceBlueprint.getX()][pieceBlueprint.getY()];
         if(targetCell == null){
