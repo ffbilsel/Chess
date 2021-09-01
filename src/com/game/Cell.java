@@ -1,5 +1,7 @@
 package com.game;
 
+import com.pieces.Piece;
+
 public class Cell {
 
     private boolean isEmpty = true;

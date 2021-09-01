@@ -2,19 +2,16 @@ package com.movement;
 
 import com.game.Cell;
 import com.game.Game;
+import com.helper.PieceColor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.function.Function;
 
 public class MoveDiagonal extends Move implements MoveType {
 
-    private final int x;
-    private final int y;
-
-    public MoveDiagonal(Integer[] pos){
-        super(pos);
-        x = pos[0];
-        y = pos[1];
+    public MoveDiagonal(int @NotNull [] pos, PieceColor color){
+        super(pos, color);
     }
 
     private void diagonal(int x, int y){
@@ -39,14 +36,13 @@ public class MoveDiagonal extends Move implements MoveType {
             Integer[] currentPos = new Integer[]{x,y};
             Cell currentCell = Game.board[x][y];
             if(currentCell.isEmpty()){
-                super.getPossibleMoves().put(currentPos,true);
+                super.getPossibleMoves().put(Game.generateHash(currentPos),true);
                 vars[0] = operation1.apply(vars[0]);
                 vars[1] = operation2.apply(vars[1]);
             }
 
             else if(currentCell.getCurrentPiece().getColor() != getColor()){
-                getPossibleMoves().put(currentPos,true);
-                getPossibleCollisions().add(currentPos);
+                getPossibleMoves().put(Game.generateHash(currentPos),true);
                 break;
             }
             else{
@@ -61,5 +57,5 @@ public class MoveDiagonal extends Move implements MoveType {
     }
 
     @Override
-    public void move() { diagonal(x,y); }
+    public HashMap<Integer,Boolean>  move() { diagonal(x,y);  return getPossibleMoves(); }
 }

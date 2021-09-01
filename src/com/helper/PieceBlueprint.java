@@ -1,17 +1,20 @@
 package com.helper;
 
+import com.game.Game;
 import org.jetbrains.annotations.NotNull;
 
 public class PieceBlueprint {
     private final PieceColor pieceColor;
-    private final Integer[] pos;
+    private final int[] pos;
+    private final PieceType pieceType;
     private final String type;
     private final int x;
     private final int y;
 
-    public PieceBlueprint(PieceType pieceType, PieceColor pieceColor, Integer @NotNull [] pos) {
+    public PieceBlueprint(PieceType pieceType, PieceColor pieceColor, int @NotNull [] pos) {
+        this.pieceType = pieceType;
         this.pieceColor = pieceColor;
-        type = Helper.pieceTypeToString(pieceType);
+        type = Game.pieceTypeToString(pieceType);
         x = pos[0];
         y = pos[1];
         this.pos = pos;
@@ -33,9 +36,9 @@ public class PieceBlueprint {
         return y;
     }
 
-    public Integer[] getPos() {
+    public int[] getPos() {
         return pos;
     }
 
-
+    public PieceType getPieceType(){ return pieceType; }
 }

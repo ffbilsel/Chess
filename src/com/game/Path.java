@@ -1,16 +1,16 @@
 package com.game;
 
+import com.pieces.Piece;
 import org.jetbrains.annotations.NotNull;
 
 public class Path {
 
-    private final Piece capturedPiece;
-    private final Integer[] pos;
+    private Piece capturedPiece;
+    private final int[] pos;
+    private static  int counter = 0;
+    public Path(int @NotNull [] pos){ capturedPiece = Game.board[pos[0]][pos[1]].getCurrentPiece(); this.pos = pos; counter++; }
 
-    public Path(Integer @NotNull [] pos){ capturedPiece = Game.board[pos[0]][pos[1]].getCurrentPiece(); this.pos = pos; }
-
+    public int getCounter(){ return counter; }
     public Piece getCapturedPiece() { return capturedPiece; }
-
-    public Integer[] getPos() { return pos; }
-
+    public int[] getPos() { return pos; }
 }

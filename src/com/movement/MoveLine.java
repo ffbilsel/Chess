@@ -6,26 +6,14 @@ import com.helper.PieceColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.function.Function;
 
-public class MoveLine implements MoveType {
+public class MoveLine extends Move implements MoveType {
 
-    private final PieceColor color;
-    private final int x;
-    private final int y;
-    private final LinkedList<Integer[]> possibleCollisions = new LinkedList<>();
-    private final HashMap<Integer[],Boolean> possibleMoves = new HashMap<>(64);
-
-    public MoveLine(Integer @NotNull [] pos){
-        this.x = pos[0]; this.y = pos[1];
-        color = Game.board[x][y].getCurrentPiece().getColor();
-        for(int i = 0; i < Game.boardSize; i++){
-            for(int j = 0; j < Game.boardSize; j++){
-                possibleMoves.put(new Integer[] {i,j}, false);
-            }
-        }
+    public MoveLine(int @NotNull [] pos, PieceColor color){
+        super(pos ,color);
     }
+
 
     private void line(int x,int y) {
         char[] chars = new char[] {'x', 'y'};
@@ -47,13 +35,12 @@ public class MoveLine implements MoveType {
             Integer[] currentPos = new Integer[]{x,y};
             Cell currentCell = Game.board[x][y];
             if(currentCell.isEmpty()){
-                possibleMoves.put(currentPos,true);
+                getPossibleMoves().put(Game.generateHash(currentPos),true);
                 var = operation.apply(var);
             }
 
-            else if(currentCell.getCurrentPiece().getColor() != color){
-                possibleMoves.put(currentPos,true);
-                possibleCollisions.add(currentPos);
+            else if(currentCell.getCurrentPiece().getColor() != getColor()){
+                getPossibleMoves().put(Game.generateHash(currentPos),true);
                 break;
             }
             else{
@@ -63,8 +50,7 @@ public class MoveLine implements MoveType {
         }
 
     }
+
     @Override
-    public void move() {
-        line(x,y);
-    }
+    public HashMap<Integer,Boolean> move() { line(x,y);  return getPossibleMoves(); }
 }

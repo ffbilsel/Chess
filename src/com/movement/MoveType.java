@@ -1,5 +1,8 @@
 package com.movement;
 
+import java.util.HashMap;
+
 public interface MoveType {
-    void move();
+    HashMap<Integer,Boolean> move();
+    void setPos(int[] pos);
 }
